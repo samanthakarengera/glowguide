@@ -10,11 +10,16 @@ class Article extends Model
     /** @use HasFactory<\Database\Factories\ArticleFactory> */
     use HasFactory;
 
-
+    //Model relations hier
 
     function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'category_id','id');
     }
 
+
+    function author()
+    {
+        return $this->belongsTo(User::class,'author_id','id');
+    }
 }
