@@ -8,7 +8,6 @@ Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index'])->name(
 //user sites
 
 // admin sites
-
 //naar hier krijg je lijst met alle categorieen
 Route::get('/admin/categories',[\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('categories');
 //naar hier geef me formulier om de categorie te creeeren
