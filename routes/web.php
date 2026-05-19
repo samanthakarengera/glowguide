@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index'])->name('welcome');
 
-Route::get('/categories/create');
+Route::get('/categories/create',[\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('categories.create'); //waar je naartoe gaat voor het aanmaken van categorieen
+Route::post('/categories',[\App\Http\Controllers\Admin\CategoryController::class,'store'])->name('categories.create'); //waar je naartoe gaat als je de categorie hebt aangemaakt als je op de knop hebt gedrukt
+
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');

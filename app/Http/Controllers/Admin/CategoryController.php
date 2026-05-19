@@ -9,6 +9,11 @@ class CategoryController extends Controller
 {
     function create()
     {
-        return 'hey';
+        return view('admin.categories.create');
+    }
+
+    function store(Request $request)
+    {
+        dd($request); //met dees moet ik alles kunnen zien dat in de request ligt
     }
 }
