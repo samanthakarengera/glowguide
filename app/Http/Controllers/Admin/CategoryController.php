@@ -7,6 +7,7 @@ use \App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+
 class CategoryController extends Controller
 {
 
@@ -27,7 +28,8 @@ class CategoryController extends Controller
 
     function store(Request $request)
     {
-        
+        $request->validate([
+    'name' => 'required|unique:categories,name|max:255',]);
         \App\Models\Category::create([
             'name'=> $request->name,
             'slug'=> Str::slug($request->name),
@@ -37,4 +39,28 @@ class CategoryController extends Controller
         return redirect('/admin/categories');
         
     }
+
+    public function edit(Category $category)
+{
+    return view('admin.categories.edit', compact('category'));
+}
+
+
+
+ public function update(Request $request, Category $category)
+    {
+        $category->update([
+            'name' => ucfirst($request->name),
+            'slug' => Str::slug($request->name),
+        ]);
+
+        return redirect()->route('categories.index');
+    }
+
+public function destroy(Category $category)
+{
+    $category->delete();
+
+    return redirect()->route('categories.index');
+}
 }
