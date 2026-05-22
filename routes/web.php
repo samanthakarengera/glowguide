@@ -19,6 +19,9 @@ Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index'])->name(
 //Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class,'show');
 
 //admin
+
+//CATEGORIE
+
 // lijst van categorieën
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
 
@@ -37,16 +40,30 @@ Route::put('/admin/categories/{category}', [CategoryController::class, 'update']
 // verwijderen
 Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-//provider tonen
+//PROVIDER
+
+//tonen
 Route::get('/admin/providers', [\App\Http\Controllers\Admin\ProviderController::class, 'index'])->name('providers.index');
 
 
-//provider aanmaken
+//aanmaken
 Route::get('/admin/providers/create', [\App\Http\Controllers\Admin\ProviderController::class, 'create'])->name('providers.create');
 
 
-//provider opgeslagen
+//opgeslagen
 Route::post('/admin/providers', [\App\Http\Controllers\Admin\ProviderController::class, 'store'])->name('providers.store');
+
+//wijzigen
+Route::get('/admin/providers/{provider}/edit', [\App\Http\Controllers\Admin\ProviderController::class, 'edit'])->name('providers.edit');
+
+
+//gewijzigd
+Route::put('/admin/providers/{provider}', [\App\Http\Controllers\Admin\ProviderController::class, 'update'])->name('providers.update');
+
+
+//verwijderen
+Route::delete('/admin/providers/{provider}', [\App\Http\Controllers\Admin\ProviderController::class, 'destroy'])->name('providers.destroy');
+
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');

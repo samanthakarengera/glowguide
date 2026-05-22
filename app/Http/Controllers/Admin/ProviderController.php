@@ -2,65 +2,80 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Provider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use App\Models\Provider;
+use App\Models\Category;
 
 class ProviderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $providers = Provider::latest()->get();
+
+        return view('admin.providers.index', compact('providers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.providers.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Provider::create([
+
+            'category_id' => $request->category_id,
+
+            'name' => ucfirst($request->name),
+
+            'slug' => Str::slug($request->name),
+
+            'city' => ucfirst($request->city),
+
+            'bio' => $request->bio,
+
+        ]);
+
+        return redirect()->route('providers.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Provider $provider)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Provider $provider)
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.providers.edit', compact('provider', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Provider $provider)
     {
-        //
+        $provider->update([
+
+            'category_id' => $request->category_id,
+
+            'name' => ucfirst($request->name),
+
+            'slug' => Str::slug($request->name),
+
+            'city' => ucfirst($request->city),
+
+            'bio' => $request->bio,
+
+        ]);
+
+        return redirect()->route('providers.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Provider $provider)
     {
-        //
+        $provider->delete();
+
+        return redirect()->route('providers.index');
     }
+
 }
