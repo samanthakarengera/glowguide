@@ -37,6 +37,16 @@ Route::put('/admin/categories/{category}', [CategoryController::class, 'update']
 // verwijderen
 Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
+//provider tonen
+Route::get('/admin/providers', [\App\Http\Controllers\Admin\ProviderController::class, 'index'])->name('providers.index');
+
+
+//provider aanmaken
+Route::get('/admin/providers/create', [\App\Http\Controllers\Admin\ProviderController::class, 'create'])->name('providers.create');
+
+
+//provider opgeslagen
+Route::post('/admin/providers', [\App\Http\Controllers\Admin\ProviderController::class, 'store'])->name('providers.store');
 
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');

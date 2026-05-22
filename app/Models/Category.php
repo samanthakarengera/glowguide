@@ -16,4 +16,9 @@ class Category extends Model
     {
         return $this->hasMany(Article::class,'category_id','id');
     }
+
+    public function providers()
+{
+    return $this->hasMany(Provider::class);
+}
 }
