@@ -6,9 +6,12 @@ use App\Http\Controllers\Admin\CategoryController;
 
 //publieke sites
 Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index'])->name('welcome');
-//USER
 
-//ADMIN
+//user
+
+Route::get('/users/{user}', [App\Http\Controllers\Userzone\ProfileController::class, 'show'])->name('users.show');
+
+//admin
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
