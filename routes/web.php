@@ -60,6 +60,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //verwijderen
     Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');
 
+    //DASHBOARD
+    Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');})->middleware(['auth', 'admin'])->name('admin.dashboard');
 });
 
 

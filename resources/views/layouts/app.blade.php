@@ -1,37 +1,60 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
-
-    <!-- Tailwind CSS & Alpine.js via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.1/dist/cdn.min.js"></script>
+    <meta charset="UTF-8">
+    <title>GlowGuide</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
-<body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
-    @include('layouts.app_navigation')
 
-    <!-- Page Heading -->
-    @isset($header)
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-    @endisset
+<body>
 
-    <!-- Page Content -->
-    <main>
-        {{ $slot }}
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="/">GlowGuide</a>
+        </div>
+
+        <div class="auth-links">
+
+            @auth
+                <a href="/dashboard">Dashboard</a>
+
+                <form method="POST" action="/">
+                    @csrf
+                    <button>Logout</button>
+                </form>
+            @else
+                <a href="/login">Login</a>
+                <a href="/profile">Register</a>
+            @endauth
+
+        </div>
+
+    </header>
+
+    {{-- PAGE CONTENT --}}
+    <main class="container">
+        @yield('content')
     </main>
-</div>
+
+    {{-- FAQ --}}
+    <section id="faq">
+        <h2>FAQ</h2>
+
+        <p>Bekijk onze veelgestelde vragen</p>
+
+        <a href="/faq">Ga naar FAQ pagina</a>
+    </section>
+
+    {{-- ADMIN BUTTON --}}
+    <footer class="footer">
+
+        <a class="admin-btn" href="/login">
+            Admin Login
+        </a>
+        
+
+    </footer>
+
 </body>
 </html>

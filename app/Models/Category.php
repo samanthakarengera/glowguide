@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\FaqItem;
 
 class Category extends Model
 {
@@ -20,5 +21,10 @@ class Category extends Model
     public function providers()
 {
     return $this->hasMany(Provider::class);
+}
+
+public function faqs()
+{
+    return $this->hasMany(FaqItem::class);
 }
 }
