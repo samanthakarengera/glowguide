@@ -9,7 +9,13 @@ Route::get('/', [\App\Http\Controllers\WelcomeController::class,'index'])->name(
 
 //user
 
-Route::get('/users/{user}', [App\Http\Controllers\Userzone\ProfileController::class, 'show'])->name('users.show');
+Route::middleware('auth')->group(function () {
+
+    // profiel bewerken
+    Route::get('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::patch('/profile', [App\Http\Controllers\Userzone\ProfileController::class, 'update'])->name('profile.update');
+});
 
 //admin
 

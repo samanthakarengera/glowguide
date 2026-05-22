@@ -10,34 +10,50 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
-    {
-        return view('userzone.profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+    public function edit(Request $request)
+{
+    return view('profile.edit', [
+        'user' => $request->user(),
+    ]);
+}
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+   public function update(Request $request)
+{
+    $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    $data = $request->validate([
+        // basis profiel info
+        'username' => 'nullable|string|max:255',
+        'birthday' => 'nullable|date',
+        'bio' => 'nullable|string',
+        'city' => 'nullable|string',
+        'avatar' => 'nullable|image|max:2048',
+    ]);
+
+    // als user een nieuwe foto uploadt
+    if ($request->hasFile('avatar')) {
+        // oude foto verwijderen
+        if ($user->avatar) {
+            Storage::delete($user->avatar);
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // nieuwe foto opslaan
+        $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
     }
+
+    $user->update($data);
+
+    return redirect()->route('dashboard');
+}
 
     /**
      * Delete the user's account.
@@ -63,4 +79,5 @@ class ProfileController extends Controller
 {
     return view('users.show', compact('user'));
 }
+
 }
