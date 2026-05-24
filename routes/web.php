@@ -11,7 +11,7 @@ use App\Http\Controllers\Userzone\ProfileController;
 
 //publieke sites
 Route::get('/', [WelcomeController::class,'index'])->name('welcome');
-Route::get('/faq', [FaqController::class, 'index']);
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
 //user
 
@@ -41,9 +41,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     //categorie verwijderen
     Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-    Route::resource('admin/faq-categories', FaqCategoryController::class);
+    Route::resource('admin/faq-categories', [App\Http\Controllers\Admin\FaqCategoryController::class]);
 
-    Route::resource('admin/faq-items', FaqItemController::class);
+    Route::resource('admin/faq-items', [App\Http\Controllers\Admin\FaqItemController::class]);
 
     // PROVIDER ROUTES
 

@@ -13,6 +13,7 @@ return new class extends Migration
 {
     Schema::create('faq_items', function (Blueprint $table) {
         $table->id();
+        //koppeling naar faq categ
         $table->foreignId('faq_category_id')->constrained()->onDelete('cascade');
         $table->string('question');
         $table->text('answer');

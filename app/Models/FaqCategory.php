@@ -9,7 +9,7 @@ class FaqCategory extends Model
     protected $fillable = ['name', 'slug'];
 
     // note: 1 categorie heeft veel vragen
-    public function items()
+    public function faqItems()
     {
         return $this->hasMany(FaqItem::class);
     }

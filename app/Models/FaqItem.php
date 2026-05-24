@@ -15,6 +15,6 @@ class FaqItem extends Model
     //vraag hoort bij 1 categorie
     public function category()
     {
-        return $this->belongsTo(FaqCategory::class);
+        return $this->belongsTo(FaqCategory::class,'faq_category_id');
     }
 }

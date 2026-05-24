@@ -1,22 +1,32 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
-<h1>FAQ</h1>
+<h1>Frequently Asked Questions</h1>
 
 @foreach($categories as $category)
 
-    <h2>{{ $category->name }}</h2>
+    <div class="category-row">
 
-    {{-- elke category heeft vragen --}}
-    @foreach($category->faqs as $faq)
+        <h2>{{ $category->name }}</h2>
 
-        <div class="card">
-            <strong>{{ $faq->question }}</strong>
-            <p>{{ $faq->answer }}</p>
-        </div>
+        @foreach($category->faqItems as $item)
 
-    @endforeach
+            <div style="margin-bottom:20px;">
+
+                <strong>
+                    {{ $item->question }}
+                </strong>
+
+                <p>
+                    {{ $item->answer }}
+                </p>
+
+            </div>
+
+        @endforeach
+
+    </div>
 
 @endforeach
 

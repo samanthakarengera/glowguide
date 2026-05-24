@@ -37,14 +37,7 @@
         @yield('content')
     </main>
 
-    {{-- FAQ --}}
-    <section id="faq">
-        <h2>FAQ</h2>
-
-        <p>Bekijk onze veelgestelde vragen</p>
-
-        <a href="/faq">Ga naar FAQ pagina</a>
-    </section>
+    
 
     {{-- ADMIN BUTTON --}}
     <footer class="footer">

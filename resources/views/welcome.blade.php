@@ -18,8 +18,17 @@
 
 @endforeach
 
-<footer style="margin-top:50px;">
-    <a href="#faq">FAQ</a>
-</footer>
+<section id="faq">
 
+    <h2>Need help?</h2>
+
+    <p>
+        Bekijk onze veelgestelde vragen.
+    </p>
+
+    <a href="{{ route('faq') }}">
+        Go to FAQ
+    </a>
+
+</section>
 @endsection
