@@ -4,7 +4,7 @@
 
 <h1>FAQ Questions</h1>
 
-<a href="/admin/faq-items/create">
+<a href="/admin/faq/faqitems/create">
     + New FAQ Question
 </a>
 
