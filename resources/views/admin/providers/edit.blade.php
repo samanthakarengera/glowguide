@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ url()->previous() }}" class="back-btn">
+    ← Go Back
+</a>
+
 <h1>Edit Provider</h1>
 
 <form action="{{ route('providers.update', $provider->id) }}" method="post">

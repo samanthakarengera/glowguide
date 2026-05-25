@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ url()->previous() }}" class="back-btn">
+    ← Go Back
+</a>
+
 <h1>Edit Category</h1>
 
 <form action="{{ route('categories.update', $category->id) }}" method="post">

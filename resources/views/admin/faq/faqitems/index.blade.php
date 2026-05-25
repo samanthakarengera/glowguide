@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ url()->previous() }}" class="back-btn">
+    ← Go Back
+</a>
+
 <h1>FAQ Questions</h1>
 
 <a href="/admin/faq/faqitems/create">

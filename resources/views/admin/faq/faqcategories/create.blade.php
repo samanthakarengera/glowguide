@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ url()->previous() }}" class="back-btn">
+    ← Go Back
+</a>
+
 <h1>Create FAQ Category</h1>
 
 <form action="/admin/faq/faqcategories" method="post">

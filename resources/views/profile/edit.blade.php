@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ url()->previous() }}" class="back-btn">
+    ← Go Back
+</a>
+
 <h1>My Profile</h1>
 
 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
