@@ -17,15 +17,37 @@
         <div class="auth-links">
 
             @auth
-                <a href="/dashboard">Dashboard</a>
-
-                <form method="POST" action="/">
+                
+                <form method="POST" action="/dashboard">
                     @csrf
-                    <button>Logout</button>
+
+                    <button type="submit">
+                        Dashboard
+                    </button>
                 </form>
-            @else
-                <a href="/login">Login</a>
-                <a href="/profile">Register</a>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
+                @else
+                <form method="POST" action="/login">
+                    @csrf
+
+                    <button type="submit">
+                        Log in
+                    </button>
+                </form>
+                <form method="POST" action="/login">
+                    @csrf
+
+                    <button type="submit">
+                        Register
+                    </button>
+                </form>
             @endauth
 
         </div>
