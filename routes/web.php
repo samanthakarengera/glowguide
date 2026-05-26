@@ -85,6 +85,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/providers/{provider}/edit', [ProviderController::class, 'edit'])->name('providers.edit');
 
+    Route::get('/providers/{provider}', [ProviderController::class, 'show'])->name('providers.show');
+
     Route::put('/admin/providers/{provider}', [ProviderController::class, 'update'])->name('providers.update');
 
     Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');

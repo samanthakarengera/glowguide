@@ -78,4 +78,9 @@ class ProviderController extends Controller
         return redirect()->route('providers.index');
     }
 
+    public function show(Provider $provider)
+{
+    return view('admin.providers.show', compact('provider'));
+}
+
 }
