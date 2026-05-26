@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// note:
-// controllers importeren
-
 use App\Http\Controllers\WelcomeController;
 
 use App\Http\Controllers\Userzone\ProfileController;
@@ -17,43 +14,29 @@ use App\Http\Controllers\Admin\FaqItemController;
 use App\Http\Controllers\FaqController;
 
 
-// ------------------------------------------------
 // PUBLIEKE PAGINA'S
-// ------------------------------------------------
 
 // homepage
-
-Route::get('/', [WelcomeController::class, 'index'])
-    ->name('welcome');
-
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // publieke FAQ pagina
 
-Route::get('/faq', [FaqController::class, 'index'])
-    ->name('faq');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
 
-// ------------------------------------------------
+
 // USER ROUTES
 // enkel ingelogde users
-// ------------------------------------------------
+
 
 Route::middleware(['auth'])->group(function () {
 
     // profiel pagina
-
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
-
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // profiel updaten
-
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
-
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // profiel verwijderen
-
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'destroy']) ->name('profile.destroy');
 
 });
 
@@ -64,9 +47,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    // -------------------------
+   
     // ADMIN DASHBOARD
-    // -------------------------
 
     Route::get('/admin/dashboard', function () {
 
@@ -75,77 +57,56 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('admin.dashboard');
 
 
-    // -------------------------
+    
     // CATEGORIES
-    // -------------------------
+  
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
 
-    Route::get('/admin/categories', [CategoryController::class, 'index'])
-        ->name('categories.index');
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])
-        ->name('categories.create');
+    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
 
-    Route::post('/admin/categories', [CategoryController::class, 'store'])
-        ->name('categories.store');
+    Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])->name('categories.show');
 
-    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])
-        ->name('categories.edit');
+    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 
-    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])
-        ->name('categories.update');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
-    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])
-        ->name('categories.destroy');
+    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
-    // -------------------------
     // PROVIDERS
-    // -------------------------
+    
+    Route::get('/admin/providers', [ProviderController::class, 'index'])->name('providers.index');
 
-    Route::get('/admin/providers', [ProviderController::class, 'index'])
-        ->name('providers.index');
+    Route::get('/admin/providers/create', [ProviderController::class, 'create'])->name('providers.create');
 
-    Route::get('/admin/providers/create', [ProviderController::class, 'create'])
-        ->name('providers.create');
+    Route::post('/admin/providers', [ProviderController::class, 'store'])->name('providers.store');
 
-    Route::post('/admin/providers', [ProviderController::class, 'store'])
-        ->name('providers.store');
+    Route::get('/admin/providers/{provider}/edit', [ProviderController::class, 'edit'])->name('providers.edit');
 
-    Route::get('/admin/providers/{provider}/edit', [ProviderController::class, 'edit'])
-        ->name('providers.edit');
+    Route::put('/admin/providers/{provider}', [ProviderController::class, 'update'])->name('providers.update');
 
-    Route::put('/admin/providers/{provider}', [ProviderController::class, 'update'])
-        ->name('providers.update');
-
-    Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])
-        ->name('providers.destroy');
+    Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');
 
 
-    // -------------------------
+    
     // FAQ CATEGORIES
-    // -------------------------
-
-    Route::resource(
-        'admin/faq-categories',
-        FaqCategoryController::class
-    );
+   
+    Route::resource(  'admin/faq-categories',FaqCategoryController::class);
 
 
-    // -------------------------
+    
     // FAQ ITEMS
-    // -------------------------
+   
 
-    Route::resource(
-        'admin/faq-items',
-        FaqItemController::class
-    );
+    Route::resource('admin/faq-items',FaqItemController::class );
 
 });
 
 
-// ------------------------------------------------
+
 // DASHBOARD
-// ------------------------------------------------
 
 Route::get('/dashboard', function () {
 
@@ -154,9 +115,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-// ------------------------------------------------
+
 // AUTH ROUTES
 // login/register/logout
-// ------------------------------------------------
+
 
 require __DIR__.'/auth.php';
