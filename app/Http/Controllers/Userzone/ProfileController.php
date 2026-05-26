@@ -49,15 +49,13 @@ class ProfileController extends Controller
         // nieuwe foto opslaan
         $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
     }
+    
 
     $user->update($data);
 
-    return redirect()->route('dashboard');
+    return redirect('/profile');
 }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [

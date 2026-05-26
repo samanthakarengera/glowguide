@@ -10,49 +10,52 @@
 
     <header class="topbar">
 
-        <div class="logo">
-            <a href="/">GlowGuide</a>
-        </div>
+    <div class="logo">
+        <a href="/">
+             GlowGuide
+        </a>
+    </div>
 
-        <div class="auth-links">
+    <div class="auth-links">
 
-            @auth
-                
-                <form method="POST" action="/dashboard">
-                    @csrf
+        @auth
 
-                    <button type="submit">
-                        Dashboard
-                    </button>
-                </form>
+            <a href="/profile" class="nav-btn">
+                My Profile
+            </a>
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+            @if(auth()->user()->is_admin)
 
-                    <button type="submit">
-                        Logout
-                    </button>
-                </form>
-                @else
-                <form method="POST" action="/login">
-                    @csrf
+                <a href="/admin/dashboard" class="nav-btn">
+                    Dashboard
+                </a>
 
-                    <button type="submit">
-                        Log in
-                    </button>
-                </form>
-                <form method="POST" action="/login">
-                    @csrf
+            @endif
 
-                    <button type="submit">
-                        Register
-                    </button>
-                </form>
-            @endauth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
 
-        </div>
+                <button type="submit">
+                    Logout
+                </button>
+            </form>
 
-    </header>
+        @else
+
+            <a href="/login" class="nav-btn">
+                Log in
+            </a>
+
+            <a href="/register" class="nav-btn">
+                Register
+            </a>
+
+        @endauth
+
+    </div>
+
+</header>
+
 
     {{-- PAGE CONTENT --}}
     <main class="container">

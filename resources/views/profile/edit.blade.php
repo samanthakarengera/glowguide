@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
@@ -8,34 +8,42 @@
 
 <h1>My Profile</h1>
 
-<form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+<form method="POST" action="/profile">
 
     @csrf
     @method('PATCH')
 
     <label>Username</label>
-    <input type="text" name="username" value="{{ $user->username }}">
+
+    <input
+        type="text"
+        name="username"
+        value="{{ auth()->user()->username }}"
+    >
 
     <label>Birthday</label>
-    <input type="date" name="birthday" value="{{ $user->birthday }}">
+
+    <input
+        type="date"
+        name="birthday"
+        value="{{ auth()->user()->birthday }}"
+    >
 
     <label>City</label>
-    <input type="text" name="city" value="{{ $user->city }}">
 
-    <label>About Me</label>
-    <textarea name="bio">{{ $user->bio }}</textarea>
+    <input
+        type="text"
+        name="city"
+        value="{{ auth()->user()->city }}"
+    >
 
-    <label>Avatar</label>
-    <input type="file" name="avatar">
+    <label>Bio</label>
 
-    @if($user->avatar)
-        <br>
-        <img src="{{ asset('storage/' . $user->avatar) }}" width="120">
-    @endif
+    <textarea name="bio">{{ auth()->user()->bio }}</textarea>
 
-    <br><br>
-
-    <button type="submit">Save</button>
+    <button type="submit">
+        Save Profile
+    </button>
 
 </form>
 

@@ -22,12 +22,18 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 // publieke FAQ pagina
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
+
 // category detail page
 Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])->name('categories.show');
 
 // provider detail page
-Route::get('/providers/{provider}', [ProviderController::class, 'show'])->name('providers.show');
+Route::get('/providers/{provider}', [WelcomeController::class, 'showProvider'])->name('providers.show');
 
+// contact pagina
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+
+// form versturen
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send']);
 
 // USER ROUTES
 // enkel ingelogde users

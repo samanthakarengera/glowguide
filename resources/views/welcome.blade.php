@@ -28,16 +28,44 @@
 
 </div>
 
-<section id="faq">
+<section style="
+margin-top:80px;
+padding:40px;
+background:#ffe6f0;
+border-radius:25px;
+text-align:center;
+">
 
-    <h2>Need help?</h2>
+    <h2 style="font-size:32px;">
+        Frequently Asked Questions 
+    </h2>
 
-    <p>
-        Bekijk onze veelgestelde vragen.
+    <p style="margin-bottom:20px;">
+        Need help? Find answers to common questions.
     </p>
 
-    <a href="{{ route('faq') }}">
-        Go to FAQ
+    <a href="/faq" class="nav-btn">
+        View FAQ
+    </a>
+
+<section style="
+margin-top:40px;
+padding:40px;
+background:#ffd6e7;
+border-radius:25px;
+text-align:center;
+">
+
+    <h2 style="font-size:32px;">
+        Contact Us 💌
+    </h2>
+
+    <p style="margin-bottom:20px;">
+        Have questions or need help?
+    </p>
+
+    <a href="/contact" class="nav-btn">
+        Contact GlowGuide
     </a>
 
 </section>

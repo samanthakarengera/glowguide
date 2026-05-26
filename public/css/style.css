@@ -1,3 +1,42 @@
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 30px;
+
+    background:#ffd6e7;
+
+    border-radius:20px;
+
+    margin-bottom:40px;
+}
+
+.logo a{
+    font-size:28px;
+    font-weight:bold;
+    color:#d63384;
+}
+
+.auth-links{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.nav-btn{
+    background:white;
+    padding:10px 18px;
+    border-radius:12px;
+    color:#d63384;
+    font-weight:bold;
+}
+
+button{
+    background:white;
+    color:#d63384;
+}
+
 /* note: algemene styling */
 body {
     margin: 0;
