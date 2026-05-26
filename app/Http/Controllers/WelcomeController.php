@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
+
 class WelcomeController extends Controller
 {
     public function index()
@@ -14,4 +15,14 @@ class WelcomeController extends Controller
 
     return view('welcome', compact('categories'));
 }
+
+public function showCategory(Category $category)
+{
+    
+    // providers van category ophalen
+    $providers = $category->providers;
+
+    return view('admin.categories.show', compact('category', 'providers'));
+}
+
 }
