@@ -10,13 +10,23 @@
 
 <h2>Featured Categories</h2>
 
-@foreach(\App\Models\Category::all() as $category)
+<div style="display:flex; gap:15px; flex-wrap:wrap;">
 
-    <div class="card">
-        {{ $category->name }}
-    </div>
+@foreach($categories as $category)
+
+    <a href="/categories/{{ $category->id }}">
+
+        <div class="card">
+
+            <h3>{{ $category->name }}</h3>
+
+        </div>
+
+    </a>
 
 @endforeach
+
+</div>
 
 <section id="faq">
 
