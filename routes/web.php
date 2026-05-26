@@ -20,9 +20,13 @@ use App\Http\Controllers\FaqController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // publieke FAQ pagina
-
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
+// category detail page
+Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])->name('categories.show');
+
+// provider detail page
+Route::get('/providers/{provider}', [ProviderController::class, 'show'])->name('providers.show');
 
 
 // USER ROUTES

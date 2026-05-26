@@ -16,7 +16,7 @@
 
     <a href="/categories/{{ $category->id }}">
 
-        <div class="card">
+        <div class="card" style="background:#ffd6e7;min-width:180px;text-align:center;">
 
             <h3>{{ $category->name }}</h3>
 
