@@ -32,7 +32,91 @@ De applicatie maakt gebruik van:
 - CSRF protection
 
 ---
+# Requirements
 
+Om GlowGuide lokaal uit te voeren heb je nodig:
+
+Windows
+Laravel Herd
+PHP
+Composer
+Visual Studio Code
+Git
+GitHub account
+Een moderne webbrowser zoals Google Chrome
+# Installation
+## 1. Repository clonen
+
+Open Windows Terminal / PowerShell en voer uit:
+
+git clone https://github.com/samanthakarengera/glowguide.git
+
+Ga daarna naar de projectmap:
+
+cd glowguide
+## 2. Dependencies installeren
+
+Installeer de PHP dependencies:
+
+composer install
+## 3. Environment file
+
+Maak een .env bestand op basis van .env.example.
+
+copy .env.example .env
+
+Genereer daarna de Laravel application key:
+
+php artisan key:generate
+## 4. Database configureren
+
+GlowGuide gebruikt SQLite.
+
+De databaseconfiguratie staat in .env:
+
+DB_CONNECTION=sqlite
+
+Maak indien nodig het databasebestand aan:
+
+database/database.sqlite
+## 5. Database migreren
+
+Voer uit:
+
+php artisan migrate:fresh --seed
+
+Dit maakt alle tabellen opnieuw aan en vult de database met de basisdata.
+
+## 6. Storage link
+
+Voor afbeeldingen die op de server worden opgeslagen:
+
+php artisan storage:link
+
+Dit maakt de publieke storage link aan.
+
+## 7. Applicatie starten
+
+Met Laravel Herd kan het project lokaal geopend worden via de Herd URL.
+
+Je kunt ook Laravel starten met:
+
+php artisan serve
+
+Open daarna de URL die Laravel toont in Google Chrome.
+---
+# Default Admin
+
+De applicatie bevat een standaard admin account.
+
+Controleer voor het indienen altijd de Seeder, omdat de credentials van de opdracht leidend zijn.
+
+Volgens de oorspronkelijke opdracht:
+
+Username: admin
+Email: admin@ehb.be
+Password: Password!321
+---
 # Functionaliteiten
 
 ## Bezoekers
@@ -176,7 +260,6 @@ De `auth` middleware zorgt ervoor dat bepaalde pagina's alleen toegankelijk zijn
 
 Bijvoorbeeld:
 
-```php
 Route::middleware(['auth'])->group(function () {
     // user routes
 });
@@ -195,6 +278,204 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Hierdoor kunnen gewone gebruikers geen adminfunctionaliteiten gebruiken.
 
 ---
+# Database
+
+GlowGuide gebruikt een relationele database in combinatie met Laravel Eloquent.
+
+De database wordt opgebouwd met Laravel migrations.
+
+De basisdata wordt toegevoegd met seeders.
+
+De database kan volledig opnieuw worden opgebouwd met:
+
+php artisan migrate:fresh --seed
+---
+# Database relaties
+
+GlowGuide maakt gebruik van Eloquent relationships.
+
+Een voorbeeld van een one-to-many relatie:
+
+Category
+   |
+   | hasMany
+   ↓
+Providers
+
+Eén categorie kan dus meerdere providers bevatten.
+
+Bijvoorbeeld:
+
+Makeup
+ ├── Beauty Studio A
+ ├── Glam by Sarah
+ └── Makeup Brussels
+
+Ook FAQ-categorieën kunnen meerdere FAQ-items bevatten:
+
+FAQ Category
+     |
+     | hasMany
+     ↓
+FAQ Items
+🏗️ MVC Architectuur
+
+GlowGuide volgt de MVC-architectuur van Laravel.
+
+## Model
+
+Models vertegenwoordigen data uit de database.
+
+Voorbeelden:
+
+User
+Category
+Provider
+FaqCategory
+FaqItem
+
+Models bevatten ook de Eloquent relationships.
+
+## View
+
+De views bevatten de HTML en Blade-code die de gebruiker ziet.
+
+De views bevinden zich in:
+
+resources/views/
+
+Blade wordt gebruikt voor dynamische inhoud.
+
+Voorbeelden:
+
+@foreach
+@if
+@auth
+@guest
+---
+## Controller
+
+Controllers bevatten de logica van de applicatie.
+
+Voorbeelden:
+
+WelcomeController
+ProfileController
+CategoryController
+ProviderController
+FaqController
+FaqCategoryController
+FaqItemController
+ContactController
+
+Controllers verwerken bijvoorbeeld:
+
+formulierdata
+databasebewerkingen
+redirects
+data voor views
+---
+# Routes
+
+De web-routes bevinden zich in:
+
+routes/web.php
+
+Publieke routes zijn bijvoorbeeld:
+
+Route::get('/', [WelcomeController::class, 'index']);
+
+Route::get('/faq', [FaqController::class, 'index']);
+
+Route::get('/categories/{category}', [WelcomeController::class, 'showCategory']);
+
+Route::get('/providers/{provider}', [WelcomeController::class, 'showProvider']);
+
+Route::get('/contact', [ContactController::class, 'index']);
+
+User routes worden beschermd met:
+
+Route::middleware(['auth'])->group(function () {
+    // user routes
+});
+
+Admin routes worden beschermd met:
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    // admin routes
+});
+
+Authentication routes worden voorzien door:
+
+require __DIR__.'/auth.php';
+---
+# CRUD
+
+CRUD staat voor:
+
+Create, Read, Update, Delete
+
+GlowGuide gebruikt CRUD onder andere voor:
+
+Categories
+Create category
+Read categories
+Update category
+Delete category
+Providers
+Create provider
+Read providers
+Update provider
+Delete provider
+FAQ
+Create FAQ category/item
+Read FAQ category/items
+Update FAQ category/item
+Delete FAQ category/item
+---
+# Layout
+
+GlowGuide gebruikt meerdere Blade layouts om herhaling van HTML te vermijden.
+
+De layouts bevatten onder andere:
+
+Navigatie
+Logo
+Authenticatieknoppen
+Algemene styling
+Admin navigatie
+
+De applicatie gebruikt een zachte roze/babyroze visuele stijl die past bij het beautythema.
+---
+# Security
+
+Laravel beveiligingsfunctionaliteiten worden gebruikt.
+
+CSRF Protection
+
+Formulieren bevatten:
+
+@csrf
+
+Hierdoor worden formulieren beschermd tegen Cross-Site Request Forgery.
+
+XSS Protection
+
+Laravel escaped standaard output wanneer:
+
+{{ $variable }}
+
+wordt gebruikt.
+
+Hierdoor wordt HTML/JavaScript in gebruikersinput niet zomaar uitgevoerd.
+
+## Authentication
+
+Gevoelige pagina's worden beschermd met middleware.
+
+## Validation
+
+Formuliergegevens worden gecontroleerd voordat ze in de database worden opgeslagen.
 
 <p align="center" style="font-size: 24px; margin-bottom: -25px; color: #EF3B2D;">
     <strong>Educational<br/> Starter Pack<br/></strong><span style="color:gray">for</span>
