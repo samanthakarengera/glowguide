@@ -180,8 +180,19 @@ Bijvoorbeeld:
 Route::middleware(['auth'])->group(function () {
     // user routes
 });
+Hierdoor kunnen niet-ingelogde bezoekers niet rechtstreeks naar de profielpagina gaan.
 
+## Admin middleware
 
+De custom admin middleware controleert of een ingelogde gebruiker adminrechten heeft.
+
+Adminpaginas worden beschermd met:
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    // admin routes
+});
+
+Hierdoor kunnen gewone gebruikers geen adminfunctionaliteiten gebruiken.
 
 ---
 
