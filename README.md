@@ -49,7 +49,7 @@ Een moderne webbrowser zoals Google Chrome
 
 Open Windows Terminal / PowerShell en voer uit:
 
-git clone https://github.com/samanthakarengera/glowguide.git
+´´git clone https://github.com/samanthakarengera/glowguide.git´´
 
 Ga daarna naar de projectmap:
 
