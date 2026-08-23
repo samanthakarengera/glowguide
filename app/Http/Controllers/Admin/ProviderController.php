@@ -49,23 +49,23 @@ class ProviderController extends Controller
     {
         $categories = Category::all();
 
+
         return view('admin.providers.edit', compact('provider', 'categories'));
     }
 
     public function update(Request $request, Provider $provider)
     {
-        $provider->update([
+        $request->validate([
+            'name' => 'required|unique:providers,name|min:4|max:255',
+        ]);
+        
 
+    $provider->update([
             'category_id' => $request->category_id,
-
             'name' => ucfirst($request->name),
-
             'slug' => Str::slug($request->name),
-
             'city' => ucfirst($request->city),
-
             'bio' => $request->bio,
-
         ]);
 
         return redirect()->route('providers.index');
@@ -80,7 +80,7 @@ class ProviderController extends Controller
 
     public function show(Provider $provider)
 {
-    return view('admin.providers.show', compact('provider'));
+    return view('providers.show', compact('provider'));
 }
 
 }

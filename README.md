@@ -1,3 +1,190 @@
+# GlowGuide 🌸💌 
+
+GlowGuide is een beauty-webapplicatie gebouwd met Laravel 13.
+
+Het concept is vergelijkbaar met een platform zoals Treatwell. Bezoekers kunnen beauty providers ontdekken op basis van categorieën zoals Nails, Lashes, Brows, Makeup en Skincare.
+
+Gebruikers kunnen een account aanmaken, inloggen en hun eigen profiel beheren. Admins kunnen de inhoud van de website beheren via een adminomgeving.
+
+---
+
+## Projectbeschrijving
+
+GlowGuide is ontwikkeld als eindproject voor het vak Backend Web.
+
+Het doel van het project is om de belangrijkste Laravel-concepten toe te passen in een volledige dynamische webapplicatie.
+
+De applicatie maakt gebruik van:
+
+- Laravel 13
+- PHP
+- Blade
+- SQLite
+- Eloquent ORM
+- Laravel Authentication
+- Middleware
+- Migrations
+- Seeders
+- Controllers
+- CRUD-functionaliteiten
+- Blade layouts
+- Form validation
+- CSRF protection
+
+---
+
+# Functionaliteiten
+
+## Bezoekers
+
+Een bezoeker die niet ingelogd is kan:
+
+- De homepage bekijken
+- Beauty categorieën bekijken
+- Providers bekijken
+- Een provider detailpagina bekijken
+- De FAQ bekijken
+- Het contactformulier gebruiken
+- Een account registreren
+- Inloggen
+
+---
+
+## Gebruikers
+
+Een ingelogde gebruiker kan:
+
+- Zijn/haar profiel bekijken
+- De profielgegevens aanpassen
+- Een gebruikersnaam instellen
+- Een verjaardag instellen
+- Een korte bio toevoegen
+- Een locatie instellen
+- Een profielfoto uploaden
+- Uitloggen
+
+---
+
+## Admin
+
+Een admin heeft toegang tot het admin dashboard.
+
+Admins kunnen:
+
+- Categorieën beheren
+- Providers beheren
+- FAQ-categorieën beheren
+- FAQ-vragen en antwoorden beheren
+- Providers toevoegen
+- Providers wijzigen
+- Providers verwijderen
+- Categorieën toevoegen
+- Categorieën wijzigen
+- Categorieën verwijderen
+- FAQ-categorieën beheren
+- FAQ-items beheren
+
+---
+
+# Beauty categorieën
+
+GlowGuide gebruikt verschillende beautycategorieën:
+
+- Nails
+- Lashes
+- Brows
+- Makeup
+- Skincare
+
+Een bezoeker kan bijvoorbeeld op **Makeup** klikken en vervolgens alle providers binnen deze categorie bekijken.
+
+---
+
+# Providers
+
+Elke provider bevat informatie zoals:
+
+- Naam
+- Beschrijving
+- Stad/locatie
+- Categorie
+- Afbeelding
+
+Providers worden door admins beheerd via het admin dashboard.
+
+Een bezoeker kan een categorie openen en vervolgens doorklikken naar een specifieke provider.
+
+---
+
+# FAQ
+
+De FAQ-pagina bevat veelgestelde vragen en antwoorden.
+
+De vragen worden gegroepeerd per categorie.
+
+Admins kunnen:
+
+- FAQ-categorieën toevoegen
+- FAQ-categorieën wijzigen
+- FAQ-categorieën verwijderen
+- FAQ-vragen toevoegen
+- FAQ-vragen wijzigen
+- FAQ-vragen verwijderen
+
+De FAQ zelf is publiek toegankelijk.
+
+---
+
+# Contact
+
+Bezoekers kunnen via de contactpagina contact opnemen met GlowGuide.
+
+Het contactformulier bevat een bericht dat door de applicatie wordt verwerkt.
+
+Na het versturen wordt het bericht naar het ingestelde admin e-mailadres verstuurd.
+
+---
+
+# Authentication
+
+GlowGuide gebruikt Laravel's authentication functionaliteiten.
+
+Gebruikers kunnen:
+
+- Registreren
+- Inloggen
+- Uitloggen
+- Wachtwoord resetten
+- Ingelogd blijven via Remember Me
+
+Er wordt onderscheid gemaakt tussen:
+
+- Gewone gebruikers
+- Admins
+
+Admins krijgen toegang tot het admin dashboard.
+
+---
+
+# Middleware
+
+Middleware wordt gebruikt om toegang tot bepaalde pagina's te beperken.
+
+## Auth middleware
+
+De `auth` middleware zorgt ervoor dat bepaalde pagina's alleen toegankelijk zijn voor ingelogde gebruikers.
+
+Bijvoorbeeld:
+
+```php
+Route::middleware(['auth'])->group(function () {
+    // user routes
+});
+
+
+
+---
+
 <p align="center" style="font-size: 24px; margin-bottom: -25px; color: #EF3B2D;">
     <strong>Educational<br/> Starter Pack<br/></strong><span style="color:gray">for</span>
 </p>
