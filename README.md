@@ -109,12 +109,10 @@ Open daarna de URL die Laravel toont in Google Chrome.
 
 De applicatie bevat een standaard admin account.
 
-Controleer voor het indienen altijd de Seeder, omdat de credentials van de opdracht leidend zijn.
-
-Volgens de oorspronkelijke opdracht:
-
 `Username: admin`
+
 `Email: admin@ehb.be`
+
 `Password: Password!321`
 
 ---
@@ -261,9 +259,8 @@ De `auth` middleware zorgt ervoor dat bepaalde pagina's alleen toegankelijk zijn
 
 Bijvoorbeeld:
 
-`Route::middleware(['auth'])->group(function () {`
-   ` // user routes`
-`});`
+`Route::middleware(['auth'])->group(function () { // user routes });`
+
 Hierdoor kunnen niet-ingelogde bezoekers niet rechtstreeks naar de profielpagina gaan.
 
 ## Admin middleware
@@ -272,9 +269,7 @@ De custom admin middleware controleert of een ingelogde gebruiker adminrechten h
 
 Adminpaginas worden beschermd met:
 
-`Route::middleware(['auth', 'admin'])->group(function () {`
-   ` // admin routes`
-`});`
+`Route::middleware(['auth', 'admin'])->group(function () { // admin routes });`
 
 Hierdoor kunnen gewone gebruikers geen adminfunctionaliteiten gebruiken.
 
@@ -289,7 +284,8 @@ De basisdata wordt toegevoegd met seeders.
 
 De database kan volledig opnieuw worden opgebouwd met:
 
-php artisan migrate:fresh --seed
+`php artisan migrate:fresh --seed`
+
 ---
 # Database relaties
 
@@ -319,6 +315,7 @@ FAQ Category
      | hasMany
      ↓
 FAQ Items
+---
 # MVC Architectuur
 
 GlowGuide volgt de MVC-architectuur van Laravel.
@@ -386,21 +383,21 @@ Publieke routes zijn bijvoorbeeld:
 
 `Route::get('/', [WelcomeController::class, 'index']);`
 
+
 `Route::get('/providers/{provider}', [WelcomeController::class, 'showProvider']);`
+
 
 `Route::get('/contact', [ContactController::class, 'index']);`
 
+
 User routes worden beschermd met:
 
-`Route::middleware(['auth'])->group(function () {`
-   ` // user routes`
-`});`
+`Route::middleware(['auth'])->group(function () { // user routes });`
+
 
 Admin routes worden beschermd met:
 
-`Route::middleware(['auth', 'admin'])->group(function () {`
- `   // admin routes`
-`});`
+`Route::middleware(['auth', 'admin'])->group(function () { // admin routes });`
 
 Authentication routes worden voorzien door:
 
