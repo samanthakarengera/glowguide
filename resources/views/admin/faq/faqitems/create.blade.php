@@ -2,9 +2,9 @@
 
 @section('content')
 
-<a href="{{ url()->previous() }}" class="back-btn">
-    ← Go Back
-</a>
+<a href="{{ route('faq-items.index') }}" class="back-button">
+        ← Back to FAQ Questions
+    </a>
 
 <h1>Create FAQ Question</h1>
 

@@ -2,10 +2,9 @@
 
 @section('content')
 
-<a href="{{ url()->previous() }}" class="back-btn">
-    ← Go Back
+<a href="{{ route('admin.dashboard') }}" class="back-button">
+        ← Back to Dashboard
 </a>
-
 <h1>Providers</h1>
 
 <a href="{{ route('providers.create') }}">
