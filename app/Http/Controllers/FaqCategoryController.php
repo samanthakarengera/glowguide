@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,12 +15,12 @@ class FaqCategoryController extends Controller
     {
         $categories = FaqCategory::all();
 
-        return view('admin.faq_categories.index', compact('categories'));
+        return view('admin.faq.faqcategories.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('admin.faq_categories.create');
+        return view('admin.faq.faqcategories.create');
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class FaqCategoryController extends Controller
 
     public function edit(FaqCategory $faq_category)
     {
-        return view('admin.faq_categories.edit', compact('faq_category'));
+        return view('admin.faq.faqcategories.edit', compact('faq_category'));
     }
 
     public function update(Request $request, FaqCategory $faq_category)

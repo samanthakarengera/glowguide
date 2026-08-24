@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class FaqItemController extends Controller
     {
         $faqItems = FaqItem::latest()->get();
 
-        return view('admin.faq_items.index', compact('faqItems'));
+        return view('admin.faq.faqitems.index', compact('faqItems'));
     }
 
     // PUBLIEKE FAQ PAGINA
@@ -33,7 +33,7 @@ class FaqItemController extends Controller
     {
         $categories = FaqCategory::all();
 
-        return view('admin.faq_items.create', compact('categories'));
+        return view('admin.faq.faqcategories.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class FaqItemController extends Controller
     {
         $categories = FaqCategory::all();
 
-        return view('admin.faq_items.edit', compact('faq_item', 'categories'));
+        return view('admin.faq.faqcategories.edit', compact('faq_item', 'categories'));
     }
 
     public function update(Request $request, FaqItem $faq_item)

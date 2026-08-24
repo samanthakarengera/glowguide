@@ -10,8 +10,8 @@ use App\Http\Controllers\Userzone\ProfileController;
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProviderController;
-use App\Http\Controllers\Admin\FaqCategoryController;
-use App\Http\Controllers\Admin\FaqItemController;
+use App\Http\Controllers\FaqCategoryController;
+use App\Http\Controllers\FaqItemController;
 
 
 // PUBLIEKE PAGINA'S
@@ -69,7 +69,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // ADMIN DASHBOARD
 
-    Route::get('/admin/dashboard', function () {
+    Route::get('/admin', function () {
 
         return view('admin.dashboard');
 
