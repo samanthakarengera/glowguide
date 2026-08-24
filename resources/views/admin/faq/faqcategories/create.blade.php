@@ -2,24 +2,44 @@
 
 @section('content')
 
-<a href="{{ url()->previous() }}" class="back-btn">
-    ← Go Back
-</a>
+<div class="admin-page">
 
-<h1>Create FAQ Category</h1>
+    <a href="{{ route('faq-categories.index') }}" class="back-button">
+        ← Back to FAQ Categories
+    </a>
 
-<form action="/admin/faq/faqcategories" method="post">
+    <h1>New FAQ Category </h1>
 
-    @csrf
+    <form action="{{ route('faq-categories.store') }}" method="POST">
 
-    <label>Name</label>
+        @csrf
 
-    <input type="text" name="name">
+        <div class="form-group">
 
-    <button type="submit">
-        Create
-    </button>
+            <label for="name">
+                Category name
+            </label>
 
-</form>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ old('name') }}"
+                required
+            >
+
+            @error('name')
+                <p class="error-message">{{ $message }}</p>
+            @enderror
+
+        </div>
+
+        <button type="submit" class="primary-button">
+            Create Category
+        </button>
+
+    </form>
+
+</div>
 
 @endsection

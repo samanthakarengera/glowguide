@@ -33,7 +33,7 @@ class FaqItemController extends Controller
     {
         $categories = FaqCategory::all();
 
-        return view('admin.faq.faqcategories.create', compact('categories'));
+        return view('admin.faq.faqitems.create', compact('categories'));
     }
 
     public function store(Request $request)
