@@ -8,7 +8,7 @@
 
 <h1>FAQ Questions</h1>
 
-<a href="/admin/faq/faqitems/create">
+<a href="{{ route('faq-items.create') }}" class="primary-button">
     + New FAQ Question
 </a>
 

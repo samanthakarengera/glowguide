@@ -8,7 +8,7 @@
 
 <h1>FAQ Categories</h1>
 
-<a href="/admin/faq/faqcategories/create">
+<a href="{{ route('faq-categories.create') }}" class="primary-button">
     + New Category
 </a>
 
