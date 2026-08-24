@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Controllers
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Userzone\ProfileController;
 
 use App\Http\Controllers\Admin\CategoryController;
@@ -11,53 +13,60 @@ use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqItemController;
 
-use App\Http\Controllers\FaqController;
-
 
 // PUBLIEKE PAGINA'S
 
-// homepage
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// publieke FAQ pagina
-Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+// Homepage
+Route::get('/', [WelcomeController::class, 'index'])
+    ->name('welcome');
 
+// Publieke FAQ
+Route::get('/faq', [FaqController::class, 'index'])
+    ->name('faq');
 
-// category detail page
-Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])->name('categories.show');
+// Publieke categorie
+Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])
+    ->name('categories.show');
 
-// provider detail page
-Route::get('/providers/{provider}', [WelcomeController::class, 'showProvider'])->name('providers.show');
+// Publieke provider detailpagina
+Route::get('/providers/{provider}', [WelcomeController::class, 'showProvider'])
+    ->name('providers.show');
 
-// contact pagina
-Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+// Contactpagina
+Route::get('/contact', [ContactController::class, 'index'])
+    ->name('contact');
 
-// form versturen
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send']);
+// Contactformulier versturen
+Route::post('/contact', [ContactController::class, 'send'])
+    ->name('contact.send');
+
 
 // USER ROUTES
-// enkel ingelogde users
-
+// Alleen ingelogde gebruikers
 
 Route::middleware(['auth'])->group(function () {
 
-    // profiel pagina
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // profiel updaten
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // profiel verwijderen
-    Route::delete('/profile', [ProfileController::class, 'destroy']) ->name('profile.destroy');
+    // Profiel bekijken/bewerken
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    // Profiel opslaan
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    // Account verwijderen
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 
 });
 
 
-
 // ADMIN ROUTES
-// enkel admins
+// Alleen ingelogde admins
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-   
     // ADMIN DASHBOARD
 
     Route::get('/admin/dashboard', function () {
@@ -66,70 +75,77 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     })->name('admin.dashboard');
 
-
-    
     // CATEGORIES
-  
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
 
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    // Lijst van categorieën
+    Route::get('/admin/categories', [CategoryController::class, 'index'])
+        ->name('categories.index');
 
-    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
+    // Formulier voor nieuwe categorie
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])
+        ->name('categories.create');
 
-    Route::get('/categories/{category}', [WelcomeController::class, 'showCategory'])->name('categories.show');
+    // Nieuwe categorie opslaan
+    Route::post('/admin/categories', [CategoryController::class, 'store'])
+        ->name('categories.store');
 
-    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    // Formulier categorie aanpassen
+    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])
+        ->name('categories.edit');
 
-    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    // Aangepaste categorie opslaan
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])
+        ->name('categories.update');
 
-    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-
+    // Categorie verwijderen
+    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy');
 
     // PROVIDERS
-    
-    Route::get('/admin/providers', [ProviderController::class, 'index'])->name('providers.index');
 
-    Route::get('/admin/providers/create', [ProviderController::class, 'create'])->name('providers.create');
+    // Lijst van providers
+    Route::get('/admin/providers', [ProviderController::class, 'index'])
+        ->name('providers.index');
 
-    Route::post('/admin/providers', [ProviderController::class, 'store'])->name('providers.store');
+    // Formulier nieuwe provider
+    Route::get('/admin/providers/create', [ProviderController::class, 'create'])
+        ->name('providers.create');
 
-    Route::get('/admin/providers/{provider}/edit', [ProviderController::class, 'edit'])->name('providers.edit');
+    // Nieuwe provider opslaan
+    Route::post('/admin/providers', [ProviderController::class, 'store'])
+        ->name('providers.store');
 
-    Route::get('/providers/{provider}', [ProviderController::class, 'show'])->name('providers.show');
+    // Formulier provider aanpassen
+    Route::get('/admin/providers/{provider}/edit', [ProviderController::class, 'edit'])
+        ->name('providers.edit');
 
-    Route::put('/admin/providers/{provider}', [ProviderController::class, 'update'])->name('providers.update');
+    // Provider aanpassen
+    Route::put('/admin/providers/{provider}', [ProviderController::class, 'update'])
+        ->name('providers.update');
 
-    Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])->name('providers.destroy');
+    // Provider verwijderen
+    Route::delete('/admin/providers/{provider}', [ProviderController::class, 'destroy'])
+        ->name('providers.destroy');
 
 
-    
     // FAQ CATEGORIES
-   
-    Route::resource(  'admin/faq-categories',FaqCategoryController::class);
+    Route::resource(
+        '/admin/faq-categories',
+        FaqCategoryController::class
+    );
 
-
-    
     // FAQ ITEMS
-   
-
-    Route::resource('admin/faq-items',FaqItemController::class );
+    Route::resource(
+        '/admin/faq-items',
+        FaqItemController::class
+    );
 
 });
 
 
-
-// DASHBOARD
-
-Route::get('/dashboard', function () {
-
-    return view('admin.dashboard');
-
-})->middleware(['auth'])->name('dashboard');
-
-
-
-// AUTH ROUTES
-// login/register/logout
-
+// =====================================================
+// AUTHENTICATION
+// Login / Register / Logout / Password reset
+// =====================================================
 
 require __DIR__.'/auth.php';
