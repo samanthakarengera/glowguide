@@ -38,6 +38,7 @@ class ProfileController extends Controller
         'bio' => 'nullable|string',
         'city' => 'nullable|string',
         'avatar' => 'nullable|image|max:2048',
+        'role' => ['required', 'in:customer,provider'],
     ]);
 
     // als user een nieuwe foto uploadt

@@ -1,56 +1,171 @@
 @extends('layouts.app')
 
+@section('title', 'My Profile | GlowGuide')
+
 @section('content')
 
-<a href="{{ route('welcome') }}" class="back-button" style="
-    display:inline-block;
-    margin-bottom:25px;
-    background:#ffd6e7;
-    padding:10px 15px;
-    border-radius:10px;
-">
-        ← Back to Homepage
-</a>
+<div class="profile-page">
 
-<h1>My Profile</h1>
+    {{-- Pagina introductie --}}
+    <div class="profile-heading">
+        <h1>My Profile </h1>
 
-<form method="POST" action="/profile">
+        <p>
+            Manage your personal information and tell us
+            a little about how you use GlowGuide.
+        </p>
 
-    @csrf
-    @method('PATCH')
+    </div>
 
-    <label>Username</label>
 
-    <input
-        type="text"
-        name="username"
-        value="{{ auth()->user()->username }}"
-    >
+    {{-- Succesmelding --}}
+    @if(session('success'))
 
-    <label>Birthday</label>
+        <div class="profile-success">
+            {{ session('success') }}
+        </div>
 
-    <input
-        type="date"
-        name="birthday"
-        value="{{ auth()->user()->birthday }}"
-    >
+    @endif
 
-    <label>City</label>
 
-    <input
-        type="text"
-        name="city"
-        value="{{ auth()->user()->city }}"
-    >
+    {{-- Validatiefouten --}}
+    @if($errors->any())
 
-    <label>Bio</label>
+        <div class="profile-errors">
+            <strong>Please check the following:</strong>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <textarea name="bio">{{ auth()->user()->bio }}</textarea>
 
-    <button type="submit">
-        Save Profile
-    </button>
+    <div class="profile-card">
 
-</form>
+        <form
+            method="POST"
+            action="{{ route('profile.update') }}"
+        >
+
+            @csrf
+            @method('PATCH')
+
+
+            {{-- USERNAME --}}
+            <div class="profile-field">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    value="{{ old('username', auth()->user()->username) }}"
+                    placeholder="Choose your username"
+                    required
+                >
+
+            </div>
+
+
+            {{-- BIRTHDAY --}}
+            <div class="profile-field">
+
+                <label for="birthday">
+                    Birthday
+                </label>
+
+                <input
+                    id="birthday"
+                    type="date"
+                    name="birthday"
+                    value="{{ old('birthday', auth()->user()->birthday) }}"
+                >
+
+            </div>
+
+
+            {{-- CITY --}}
+            <div class="profile-field">
+
+                <label for="city">
+                    City
+                </label>
+
+                <input
+                    id="city"
+                    type="text"
+                    name="city"
+                    value="{{ old('city', auth()->user()->city) }}"
+                    placeholder="For example Brussels"
+                >
+
+            </div>
+
+
+            {{-- ROLE --}}
+            <div class="profile-field">
+
+                <label for="role">
+                    How do you use GlowGuide?
+                </label>
+
+                <select
+                    id="role"
+                    name="role"
+                    required
+                >
+
+                    <option
+                        value="customer"
+                        {{ old('role', auth()->user()->role) === 'customer' ? 'selected' : '' }}
+                    >
+                        💗 I'm looking for beauty services
+                    </option>
+
+                    <option
+                        value="provider"
+                        {{ old('role', auth()->user()->role) === 'provider' ? 'selected' : '' }}
+                    >
+                        ✨ I'm a beauty service provider
+                    </option>
+
+                </select>
+
+                <small>
+                    You can change this later in your profile.
+                </small>
+
+            </div>
+
+
+            {{-- SAVE --}}
+            <div class="profile-actions">
+
+                <button
+                    type="submit"
+                    class="profile-save"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="{{ route('welcome') }}"
+                    class="profile-back"
+                >
+                    Back to GlowGuide
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 @endsection
