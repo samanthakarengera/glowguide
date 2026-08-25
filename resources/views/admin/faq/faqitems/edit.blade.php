@@ -4,18 +4,22 @@
 
 <div class="admin-page">
 
-    {{-- Terug naar de lijst met FAQ vragen --}}
-    <a href="{{ route('faq-items.index') }}" class="back-button">
+ 
+    <a
+        href="{{ route('faq-items.index') }}"
+        class="back-button"
+    >
         ← Back to FAQ Questions
     </a>
 
-    <h1>Edit FAQ Question 💗</h1>
+
+    <h1>Edit FAQ Question </h1>
 
     <p class="page-description">
-        Change the question, answer or category.
+        Change the category, question or answer.
     </p>
 
-    {{-- Formulier om de FAQ vraag aan te passen --}}
+
     <form
         action="{{ route('faq-items.update', $faq_item) }}"
         method="POST"
@@ -23,11 +27,9 @@
 
         @csrf
 
-        {{-- PUT is nodig omdat we bestaande data aanpassen --}}
+        {{-- PUT omdat we bestaande data aanpassen --}}
         @method('PUT')
 
-
-        {{-- FAQ CATEGORY --}}
         <div class="form-group">
 
             <label for="faq_category_id">
@@ -39,10 +41,6 @@
                 id="faq_category_id"
                 required
             >
-
-                <option value="">
-                    Select a category
-                </option>
 
                 @foreach($faq_categories as $category)
 
@@ -57,16 +55,17 @@
 
             </select>
 
+
             @error('faq_category_id')
+
                 <p class="error-message">
                     {{ $message }}
                 </p>
+
             @enderror
 
         </div>
 
-
-        {{-- QUESTION --}}
         <div class="form-group">
 
             <label for="question">
@@ -81,16 +80,17 @@
                 required
             >
 
+
             @error('question')
+
                 <p class="error-message">
                     {{ $message }}
                 </p>
+
             @enderror
 
         </div>
 
-
-        {{-- ANSWER --}}
         <div class="form-group">
 
             <label for="answer">
@@ -104,16 +104,22 @@
                 required
             >{{ old('answer', $faq_item->answer) }}</textarea>
 
+
             @error('answer')
+
                 <p class="error-message">
                     {{ $message }}
                 </p>
+
             @enderror
 
         </div>
 
 
-        <button type="submit" class="primary-button">
+        <button
+            type="submit"
+            class="primary-button"
+        >
             Update FAQ Question
         </button>
 

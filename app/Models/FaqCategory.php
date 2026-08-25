@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class FaqCategory extends Model
 {
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
 
-    // note: 1 categorie heeft veel vragen
+
+    // Eén categorie kan meerdere FAQ vragen hebben
     public function faqItems()
     {
         return $this->hasMany(FaqItem::class);

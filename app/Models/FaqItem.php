@@ -9,12 +9,11 @@ class FaqItem extends Model
     protected $fillable = [
         'faq_category_id',
         'question',
-        'answer'
+        'answer',
     ];
 
-    //vraag hoort bij 1 categorie
-    public function category()
+    public function faqCategory()
     {
-        return $this->belongsTo(FaqCategory::class,'faq_category_id');
+        return $this->belongsTo(FaqCategory::class);
     }
 }

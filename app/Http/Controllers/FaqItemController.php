@@ -3,84 +3,109 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Models\FaqItem;
 use App\Models\FaqCategory;
+use Illuminate\Http\Request;
 
 class FaqItemController extends Controller
 {
 
-    // ADMIN PAGE
-
     public function index()
     {
-        $faqItems = FaqItem::latest()->get();
+      
+        $faq_items = FaqItem::with('faqCategory')
+            ->latest()
+            ->get();
 
-        return view('admin.faq.faqitems.index', compact('faqItems'));
+        return view(
+            'admin.faq.faqitems.index',
+            compact('faq_items')
+        );
     }
 
-    // PUBLIEKE FAQ PAGINA
-
-    public function publicIndex()
-    {
-        $categories = FaqCategory::with('faqItems')->get();
-
-        return view('faq.index', compact('categories'));
-    }
 
     public function create()
     {
-        $categories = FaqCategory::all();
+        $faq_categories = FaqCategory::orderBy('name')->get();
 
-        return view('admin.faq.faqitems.create', compact('categories'));
+        return view(
+            'admin.faq.faqitems.create',
+            compact('faq_categories')
+        );
     }
 
+
+    // Nieuwe FAQ vraag opslaan
     public function store(Request $request)
     {
-        FaqItem::create([
-
-            'faq_category_id' => $request->faq_category_id,
-
-            'question' => $request->question,
-
-            'answer' => $request->answer,
-
+        // Controleer de gegevens
+        $request->validate([
+            'faq_category_id' => 'required|exists:faq_categories,id',
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
         ]);
 
-        return redirect('/admin/faq-items');
+        FaqItem::create([
+            'faq_category_id' => $request->faq_category_id,
+            'question' => $request->question,
+            'answer' => $request->answer,
+        ]);
+
+        return redirect()
+            ->route('admin.faq.faqitems.index')
+            ->with('success', 'FAQ question created successfully!');
     }
 
-    
-    public function edit(FaqItem $faq_item) {
-    // Haal alle FAQ categorieën op zodat de admin een andere categorie kan kiezen.
-    $faq_categories = FaqCategory::orderBy('name')->get();
-
-    return view(
-        'admin.faq.faqitems.edit',compact('faq_item', 'faq_categories')
-    );
-}
-
-    public function update(Request $request, FaqItem $faq_item)
+    public function show(FaqItem $faq_item)
     {
-        $faq_item->update([
+        return view(
+            'admin.faq.faqitems.index',
+            compact('faq_item')
+        );
+    }
 
-            'faq_category_id' => $request->faq_category_id,
 
-            'question' => $request->question,
+    // Toon editformulier
+    public function edit(FaqItem $faq_item)
+    {
 
-            'answer' => $request->answer,
+        $faq_categories = FaqCategory::orderBy('name')->get();
 
+        return view(
+            'admin.faq.faqitems.edit',
+            compact('faq_item', 'faq_categories')
+        );
+    }
+
+    public function update(
+        Request $request,
+        FaqItem $faq_item
+    ) {
+
+        $request->validate([
+            'faq_category_id' => 'required|exists:faq_categories,id',
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
         ]);
 
-        return redirect('/admin/faq-items');
+        $faq_item->update([
+            'faq_category_id' => $request->faq_category_id,
+            'question' => $request->question,
+            'answer' => $request->answer,
+        ]);
+
+        return redirect()
+            ->route('faq-items.index')
+            ->with('success', 'FAQ question updated successfully!');
     }
 
     public function destroy(FaqItem $faq_item)
     {
+
         $faq_item->delete();
 
-        return redirect('/admin/faq-items');
+        return redirect()
+            ->route('faq-items.index')
+            ->with('success', 'FAQ question deleted successfully!');
     }
-
 }

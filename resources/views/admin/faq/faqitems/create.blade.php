@@ -2,44 +2,131 @@
 
 @section('content')
 
-<a href="{{ route('faq-items.index') }}" class="back-button">
+<div class="admin-page">
+
+    <a
+        href="{{ route('faq-items.index') }}"
+        class="back-button"
+    >
         ← Back to FAQ Questions
     </a>
 
-<h1>Create FAQ Question</h1>
 
-<form action="/admin/faq/faqitems" method="post">
+    <h1>New FAQ Question</h1>
 
-    @csrf
+    <p class="page-description">
+        Add a question and answer to your FAQ.
+    </p>
 
-    <label>Category</label>
 
-    <select name="faq_category_id">
+    <form
+        action="{{ route('faq-items.store') }}"
+        method="POST"
+    >
 
-        @foreach($categories as $category)
+        @csrf
+-
+        <div class="form-group">
 
-            <option value="{{ $category->id }}">
+            <label for="faq_category_id">
+                Category
+            </label>
 
-                {{ $category->name }}
+            <select
+                name="faq_category_id"
+                id="faq_category_id"
+                required
+            >
 
-            </option>
+                <option value="">
+                    Select a category
+                </option>
 
-        @endforeach
+                @foreach($faq_categories as $category)
 
-    </select>
+                    <option
+                        value="{{ $category->id }}"
+                        {{ old('faq_category_id') == $category->id ? 'selected' : '' }}
+                    >
+                        {{ $category->name }}
+                    </option>
 
-    <label>Question</label>
+                @endforeach
 
-    <input type="text" name="question">
+            </select>
 
-    <label>Answer</label>
 
-    <textarea name="answer"></textarea>
+            @error('faq_category_id')
 
-    <button type="submit">
-        Create
-    </button>
+                <p class="error-message">
+                    {{ $message }}
+                </p>
 
-</form>
+            @enderror
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="question">
+                Question
+            </label>
+
+            <input
+                type="text"
+                id="question"
+                name="question"
+                value="{{ old('question') }}"
+                placeholder="For example: How can I book a provider?"
+                required
+            >
+
+
+            @error('question')
+
+                <p class="error-message">
+                    {{ $message }}
+                </p>
+
+            @enderror
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="answer">
+                Answer
+            </label>
+
+            <textarea
+                id="answer"
+                name="answer"
+                rows="6"
+                placeholder="Write the answer here..."
+                required
+            >{{ old('answer') }}</textarea>
+
+
+            @error('answer')
+
+                <p class="error-message">
+                    {{ $message }}
+                </p>
+
+            @enderror
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Create FAQ Question
+        </button>
+
+    </form>
+
+</div>
 
 @endsection
