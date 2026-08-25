@@ -5,7 +5,7 @@
 <div class="admin-page">
 
     <a href="{{ route('admin.dashboard') }}" class="back-button">
-        ← Back to dashboard
+        ← Back to Dashboard
     </a>
 
     <h1>FAQ Categories</h1>

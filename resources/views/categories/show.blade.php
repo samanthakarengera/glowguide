@@ -2,10 +2,9 @@
 
 @section('content')
 
-<a href="{{ url()->previous() }}" class="back-btn">
-    ← Go Back
+<a href="{{ route('welcome') }}" class="back-button">
+        ← Back to Homepage
 </a>
-
 <h1 style="margin-bottom:30px;">
     {{ $category->name }} 
 </h1>

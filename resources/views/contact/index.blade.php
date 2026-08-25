@@ -2,8 +2,14 @@
 
 @section('content')
 
-<a href="{{ url()->previous() }}" class="back-btn">
-    ← Go Back
+<a href="{{ route('welcome') }}" class="back-button" style="
+    display:inline-block;
+    margin-bottom:25px;
+    background:#ffd6e7;
+    padding:10px 15px;
+    border-radius:10px;
+">
+        ← Back to Homepage
 </a>
 
 <h1>Contact Us</h1>
