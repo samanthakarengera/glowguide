@@ -9,10 +9,13 @@ use App\Models\FaqCategory;
 class FaqController extends Controller
 {
     public function index()
-    {
-        //laad categories + vragen
-        $categories = FaqCategory::with('items')->get();
+{
+   
+    // faqItems() is de relationship die in FaqCategory.php staat.
+    $categories = FaqCategory::with('faqItems')
+        ->orderBy('name')
+        ->get();
 
-        return view('faq.index', compact('categories'));
-    }
+    return view('faq.index', compact('categories'));
+}
 }
