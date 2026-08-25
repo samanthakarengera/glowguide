@@ -2,6 +2,16 @@
 
 @section('content')
 
+<a href="{{ route('welcome') }}" class="back-button" style="
+    display:inline-block;
+    margin-bottom:25px;
+    background:#ffd6e7;
+    padding:10px 15px;
+    border-radius:10px;
+">
+        ← Back to Homepage
+</a>
+
 <h1>Frequently Asked Questions</h1>
 
 @foreach($categories as $category)
