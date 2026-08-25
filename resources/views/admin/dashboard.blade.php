@@ -2,6 +2,10 @@
 
 @section('content')
 
+<a href="{{ route('welcome') }}" class="back-home">
+    ← Back to Home
+</a>
+
 <h1 style="margin-bottom:30px;">
     GlowGuide Admin Dashboard
 </h1>
