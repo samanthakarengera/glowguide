@@ -26,7 +26,7 @@
 
             @if(auth()->user()->is_admin)
 
-                <a href="/admin/dashboard" class="nav-btn">
+                <a href="/admin" class="nav-btn">
                     Dashboard
                 </a>
 

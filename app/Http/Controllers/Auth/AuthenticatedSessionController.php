@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user() && Auth::user()->is_admin) {
-            return redirect('/admin/dashboard');
+            return redirect('/admin');
         }
 
     return redirect('/profile');

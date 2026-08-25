@@ -51,12 +51,15 @@ class FaqItemController extends Controller
         return redirect('/admin/faq-items');
     }
 
-    public function edit(FaqItem $faq_item)
-    {
-        $categories = FaqCategory::all();
+    
+    public function edit(FaqItem $faq_item) {
+    // Haal alle FAQ categorieën op zodat de admin een andere categorie kan kiezen.
+    $faq_categories = FaqCategory::orderBy('name')->get();
 
-        return view('admin.faq.faqcategories.edit', compact('faq_item', 'categories'));
-    }
+    return view(
+        'admin.faq.faqitems.edit',compact('faq_item', 'faq_categories')
+    );
+}
 
     public function update(Request $request, FaqItem $faq_item)
     {
