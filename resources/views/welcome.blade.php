@@ -8,7 +8,7 @@
 
     <div class="intro">
 
-        <h1>Welcome to GlowGuide ✨</h1>
+        <h1>Welcome to GlowGuide</h1>
 
         <p>
             Discover beauty providers in your area
@@ -22,10 +22,6 @@
     </div>
 
 
-
-    {{-- =========================
-         FEATURED CATEGORIES
-         ========================= --}}
 
     <div class="featured">
 

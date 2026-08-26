@@ -70,9 +70,39 @@
         <a class="admin-btn" href="/login">
             Admin Login
         </a>
-        
 
     </footer>
 
+</footer>
+
+
+<style>
+
+    .footer {
+        margin-top: 50px;
+        padding: 30px;
+        text-align: center;
+        background: #fff3f7;
+        border-top: 1px solid #f3dce4;
+    }
+
+    .admin-btn {
+        display: inline-block;
+        padding: 10px 18px;
+        background: #d982a5;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s ease;
+    }
+
+    .admin-btn:hover {
+        background: #c96f92;
+        transform: translateY(-1px);
+    }
+
+</style>
+    
 </body>
 </html>
