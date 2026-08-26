@@ -191,7 +191,6 @@ Elke provider bevat informatie zoals:
 - Beschrijving
 - Stad/locatie
 - Categorie
-- Afbeelding
 
 Providers worden door admins beheerd via het admin dashboard.
 
@@ -223,8 +222,6 @@ De FAQ zelf is publiek toegankelijk.
 Bezoekers kunnen via de contactpagina contact opnemen met GlowGuide.
 
 Het contactformulier bevat een bericht dat door de applicatie wordt verwerkt.
-
-Na het versturen wordt het bericht naar het ingestelde admin e-mailadres verstuurd.
 
 ---
 
@@ -286,35 +283,7 @@ De database kan volledig opnieuw worden opgebouwd met:
 
 `php artisan migrate:fresh --seed`
 
----
-# Database relaties
 
-GlowGuide maakt gebruik van Eloquent relationships.
-
-Een voorbeeld van een one-to-many relatie:
-
-Category
-   |
-   | hasMany
-   ↓
-Providers
-
-Eén categorie kan dus meerdere providers bevatten.
-
-Bijvoorbeeld:
-
-Makeup
- ├── Beauty Studio A
- ├── Glam by Sarah
- └── Makeup Brussels
-
-Ook FAQ-categorieën kunnen meerdere FAQ-items bevatten:
-
-FAQ Category
-     |
-     | hasMany
-     ↓
-FAQ Items
 ---
 # MVC Architectuur
 
@@ -426,11 +395,6 @@ Create FAQ category/item
 Read FAQ category/items
 Update FAQ category/item
 Delete FAQ category/item
----
-# Layout
-
-GlowGuide gebruikt meerdere Blade layouts om herhaling van HTML te vermijden.
-
 ---
 # Security
 
