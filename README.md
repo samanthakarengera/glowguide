@@ -36,14 +36,14 @@ De applicatie maakt gebruik van:
 
 Om GlowGuide lokaal uit te voeren heb je nodig:
 
-Windows
-Laravel Herd
-PHP
-Composer
-Visual Studio Code
-Git
-GitHub account
-Een moderne webbrowser zoals Google Chrome
+- Windows
+- Laravel Herd
+- PHP
+- Composer
+- Visual Studio Code
+- Git
+- GitHub account
+- Een moderne webbrowser zoals Google Chrome
 # Installation
 ## 1. Repository clonen
 
@@ -87,15 +87,8 @@ Voer uit:
 
 Dit maakt alle tabellen opnieuw aan en vult de database met de basisdata.
 
-## 6. Storage link
 
-Voor afbeeldingen die op de server worden opgeslagen:
-
-`php artisan storage:link`
-
-Dit maakt de publieke storage link aan.
-
-## 7. Applicatie starten
+## 6. Applicatie starten
 
 Met Laravel Herd kan het project lokaal geopend worden via de Herd URL.
 
@@ -166,7 +159,10 @@ Admins kunnen:
 - Categorieën verwijderen
 - FAQ-categorieën beheren
 - FAQ-items beheren
-
+- Berichten bekijken
+- Alle gebruikers zien
+- Gebruikers hun gegevens wijzigen
+- Gebruikers admin maken
 ---
 
 # Beauty categorieën
@@ -178,6 +174,7 @@ GlowGuide gebruikt verschillende beautycategorieën:
 - Brows
 - Makeup
 - Skincare
+- ...
 
 Een bezoeker kan bijvoorbeeld op **Makeup** klikken en vervolgens alle providers binnen deze categorie bekijken.
 
@@ -239,7 +236,7 @@ Gebruikers kunnen:
 
 Er wordt onderscheid gemaakt tussen:
 
-- Gewone gebruikers
+- Gewone gebruikers (customer/provider)
 - Admins
 
 Admins krijgen toegang tot het admin dashboard.
@@ -380,21 +377,12 @@ Create, Read, Update, Delete
 
 GlowGuide gebruikt CRUD onder andere voor:
 
-Categories
-Create category
-Read categories
-Update category
-Delete category
-Providers
-Create provider
-Read providers
-Update provider
-Delete provider
-FAQ
-Create FAQ category/item
-Read FAQ category/items
-Update FAQ category/item
-Delete FAQ category/item
+- Create category
+- Read categories
+- Update category
+- Delete category
+
+
 ---
 # Security
 
