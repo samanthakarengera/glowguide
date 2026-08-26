@@ -83,6 +83,34 @@ max-width:700px;
 
     </a>
 
+    <a href="{{ route('admin.user.index') }}" class="admin-action"
+    style="
+       background:#ffd6e7;
+       padding:30px;
+       border-radius:20px;
+       text-decoration:none;
+       color:black;
+       font-weight:bold;
+       "> 
+       Manage Users </a>
+
+    </a>
+
+
+    <a href="{{ route('admin.messages.index') }}" class="admin-action"
+    style="
+       background:#ffd6e7;
+       padding:30px;
+       border-radius:20px;
+       text-decoration:none;
+       color:black;
+       font-weight:bold;
+       "> 
+       Messages </a>
+
+    </a>
+</a>
+
 </div>
 
 @endsection

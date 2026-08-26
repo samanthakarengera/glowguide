@@ -10,6 +10,8 @@ use App\Http\Controllers\Userzone\ProfileController;
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\FaqItemController;
 
@@ -40,7 +42,6 @@ Route::get('/contact', [ContactController::class, 'index'])
 // Contactformulier versturen
 Route::post('/contact', [ContactController::class, 'send'])
     ->name('contact.send');
-
 
 // USER ROUTES
 // Alleen ingelogde gebruikers
@@ -139,6 +140,37 @@ Route::middleware(['auth', 'admin'])->group(function () {
         '/admin/faq-items',
         FaqItemController::class
     );
+
+    // USER MANAGEMENT
+
+    // Toon alle gebruikers
+    Route::get(
+        '/admin/users', [UserController::class, 'index'])
+        ->name('admin.user.index'
+    );
+    // Toon edit formulier
+    Route::get(
+        '/admin/users/{user}/edit', [UserController::class, 'edit'])
+        ->name('admin.user.edit')
+        ;
+
+    // Update gebruiker
+    Route::put(
+        '/admin/users/{user}', [UserController::class, 'update'])
+        ->name('admin.users.update'
+        );
+
+    // Verwijder gebruiker
+    Route::delete(
+        '/admin/users/{user}', [UserController::class, 'destroy'])
+        ->name('admin.users.destroy'
+        );
+
+    // Admin kan alle contactberichten bekijken
+    Route::get('
+        /admin/messages', [ContactMessageController::class,'index'])
+        ->name('admin.messages.index'
+        );
 
 });
 

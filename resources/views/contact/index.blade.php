@@ -36,6 +36,23 @@
 
             @csrf
 
+             <div class="form-group">
+
+                <label for="email">
+                    Your email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="example@email.com"
+                    required
+                >
+
+            </div>
+
             <div class="form-group">
 
                 <label for="message">

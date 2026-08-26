@@ -2,30 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-
-    // contact pagina tonen
     public function index()
     {
         return view('contact.index');
     }
 
-    // email versturen
+
     public function send(Request $request)
     {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'message' => ['required', 'string', 'max:5000'],
+        ]);
 
-        Mail::raw($request->message, function($mail){
+        // Bericht opslaan in de database
+        $contactMessage = ContactMessage::create([
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
 
-            $mail->to('admin@ehb.be')
-                ->subject('GlowGuide Contact Form');
 
-        });
+        // Admin krijgt die mail
+        Mail::raw(
+            "Nieuw contactbericht van: {$contactMessage->email}\n\n" .
+            $contactMessage->message,
+            function ($mail) {
 
-        return back()->with('success', 'Message sent!');
+                $mail->to('admin@ehb.be');
+
+                $mail->subject('Nieuw GlowGuide contactbericht');
+            }
+        );
+
+
+        return redirect()
+            ->route('contact')
+            ->with('success', 'Your message has been sent successfully!');
     }
-
 }

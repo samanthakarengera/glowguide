@@ -17,7 +17,7 @@ class AdminMiddleware
             return redirect('/login');
         }
         // als user geen admin is
-        if (!Auth::user()->is_admin){
+        if (!Auth::user()->role === 'admin'){
 
             abort(403);
         }
